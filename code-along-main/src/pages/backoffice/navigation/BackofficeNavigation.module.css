@@ -1,0 +1,48 @@
+.backofficeNavigation {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #2a4f5711;
+  li {
+    list-style: none;
+    font-size: 20px;
+  }
+}
+
+
+
+.backofficeNavigation a {
+  padding: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+
+
+  &.active {
+    background-color: #2a4f5756;
+  }
+}
+
+.link {
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 30px;
+  transition: all 0.3s ease;
+  padding: 10px 15px; 
+  border-radius: 5px;
+}
+
+.link:hover {
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+}
+
+.activeLink {
+  color: white;
+  background-color: rgb(184, 24, 18);
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(83, 83, 83, 0.5);
+}

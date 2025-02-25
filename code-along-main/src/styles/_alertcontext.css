@@ -1,0 +1,61 @@
+@import "./themes/alertTheme.scss";
+
+.custom-confirm-button,
+.custom-cancel-button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: green;
+  font-size: 16px;
+  color: white;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 1px 1px 5px grey;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(128, 128, 128, 0.541);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(128, 128, 128, 0.541);
+  }
+
+  &:disabled {
+    background-color: grey;
+    color: black;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  @media (min-width: 768px) {
+    padding: 14px 20px;
+    font-size: 20px;
+    margin: 10px auto;
+    max-width: 200px;
+  }
+}
+
+.custom-cancel-button {
+  background-color: red;
+}
+
+.swal2-confirm {
+  background-color: white;
+}
+
+.swal2-timer-progress-bar-container {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  height: 10px;
+  margin-top: 10px;
+}
+
+.swal2-timer-progress-bar {
+  background-color: white;
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}

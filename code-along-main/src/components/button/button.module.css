@@ -1,0 +1,93 @@
+/* Container for the buttons to align them horizontally */
+.buttonContainer {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1em;
+}
+
+/* Green Button Styling */
+.greenButton {
+  width: 150px;
+  background: rgba(0, 128, 0, 0.66);
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0.8em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.greenButton:hover {
+  background: rgba(0, 128, 0, 1);
+  transform: scale(1.05);
+}
+
+.greenButton h4 {
+  font-size: 20px;
+  color: white;
+  margin: 0;
+}
+
+/* Red Button Styling */
+.redButton {
+  width: 120px;
+  background: #df4747;
+  border: none;
+  border-radius: 5px;
+  padding: 1em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.redButton:hover {
+  background: #c13b3b;
+  transform: scale(1.05);
+}
+
+.redButton h4 {
+  font-size: 20px;
+  color: white;
+  margin: 0;
+}
+
+/* Orange Button Styling */
+.orangeButton {
+  width: 120px;
+  background: #578559;
+  border: none;
+  border-radius: 5px;
+  padding: 1em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.orangeButton:hover {
+  background: #4a6e4a;
+  transform: scale(1.05);
+}
+
+.orangeButton h4 {
+  font-size: 20px;
+  color: white;
+  margin: 0;
+}
+
+/* Like Button Styling */
+.likeButton {
+  width: 150px;
+  border: none;
+  height: 60px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.183);
+  border-radius: 25px 0 25px 0;
+}

@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Zen+Loop:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Zen+Loop:ital@0;1&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 80%;
+}
+
+@media (min-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+a,
+label {
+  font-weight: 100;
+  text-align: center;
+  font-family: "Zen Loop", cursive;
+}
+
+p {
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+h1 {
+  margin-top: 50px;
+  font-size: 30px;
+}

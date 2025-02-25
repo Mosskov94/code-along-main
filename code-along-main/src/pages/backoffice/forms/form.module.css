@@ -1,0 +1,49 @@
+.form {
+  max-width: 500px; /* Maksimal bredde for formularen */
+  margin: 2em auto; /* Centrerer formularen */
+  padding: 20px; /* Indvendig margen */
+  background-color: #f9f9f9; /* Lys baggrundsfarve */
+  border: 1px solid #ddd; /* Let grænse */
+  border-radius: 8px; /* Bløde hjørner */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Let skygge */
+}
+
+.form h2 {
+  text-align: center; /* Centrerer overskriften */
+  color: #333; /* Mørk tekstfarve */
+  margin-bottom: 20px; /* Afstand under overskriften */
+  font-size: 40px;
+}
+
+.form div {
+  margin-bottom: 15px; /* Afstand mellem felter */
+}
+
+.form label {
+  display: block; /* Blok display for label */
+  font-size: 25px; /* Mindre tekststørrelse */
+  color: #555; /* Mørkere grå farve */
+  margin-bottom: 5px; /* Afstand under label */
+}
+
+.previewImage {
+  margin: 10px;
+}
+
+.form input[type="text"],
+.form input[type="number"],
+.form input[type="file"] {
+  width: 100%; /* Fuld bredde */
+  padding: 10px; /* Indvendig margen i inputfelter */
+  border: 1px solid #ccc; /* Let grænse */
+  border-radius: 4px; /* Bløde hjørner */
+  font-size: 16px; /* Standard tekststørrelse */
+  box-sizing: border-box; /* Inkluder padding og border i elementets totale bredde */
+}
+
+.form input[type="text"]:focus,
+.form input[type="number"]:focus,
+.form input[type="file"]:focus {
+  border-color: #007bff;
+  outline: none;
+}

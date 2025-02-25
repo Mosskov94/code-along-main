@@ -1,0 +1,9 @@
+.userProfile {
+  background-color: #829b97af;
+  margin: 10px;
+  width: 80px;
+  padding: 10px 5px;
+  img {
+    width: 100%;
+  }
+}
