@@ -1,9 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"; 
 import styles from "./BackofficeNavigation.module.css";
 
+// Navigation til backoffice
 const BackofficeNavigation = () => {
   return (
     <>
+      {/* Link til "Stays"-siden */}
       <NavLink 
         to="/stays" 
         className={({ isActive }) => isActive ? styles.activeLink : styles.link}
@@ -11,6 +13,7 @@ const BackofficeNavigation = () => {
         Stays
       </NavLink>
       
+      {/* Link til "Activities"-siden */}
       <NavLink 
         to="/activities" 
         className={({ isActive }) => isActive ? styles.activeLink : styles.link}
@@ -18,6 +21,7 @@ const BackofficeNavigation = () => {
         Activity
       </NavLink>
 
+      {/* Link til "Reviews"-siden */}
       <NavLink 
         to="/reviews" 
         className={({ isActive }) => isActive ? styles.activeLink : styles.link}

@@ -2,29 +2,52 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button";
 import { useStays } from "../../components/hooks/useStays";
 import { useState } from "react";
+import Swal from 'sweetalert2'; // Importér SweetAlert2
 
+// Her laver vi en side til at styre vores ophold i backoffice
 const BackofficeStays = () => {
-  const { stays, deleteStay, refetch } = useStays();
-  const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(true); // Ny state for at styre synligheden
+  const { stays, deleteStay, refetch } = useStays(); // Henter vores ophold og funktioner til at slette og opdatere
+  const navigate = useNavigate(); // Gør det muligt at skifte side
+  const [isVisible, setIsVisible] = useState(true); // Bestemmer om vi skal vise listen eller ej
 
+  // Funktion til at gå til siden, hvor vi kan tilføje et nyt ophold
   const handleAddStays = () => {
     navigate("/stays/add");
   };
 
-
+  // Funktion til at gå til siden, hvor vi kan redigere et ophold
   const handleEdit = (staysId) => {
-    console.log(staysId)
     navigate(`/stays/edit/${staysId}`);
+  };
+
+  // Funktion til at håndtere sletning med bekræftelse
+  const handleDelete = (stayId) => {
+    Swal.fire({
+      title: 'Er du sikker?',
+      text: 'Du kan ikke fortryde denne handling!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ja, slet',
+      cancelButtonText: 'Annuller',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Sletning af opholdet, hvis brugeren bekræfter
+        deleteStay(stayId);
+        Swal.fire('Slettet!', 'Opholdet er blevet slettet.', 'success');
+      }
+    });
   };
 
   return (
     <article>
+      {/* Knappen viser eller skjuler vores liste over ophold */}
       <Button
         buttonText={isVisible ? "Skjul Ophold" : "Vis Ophold"}
         onClick={() => setIsVisible(!isVisible)}
       />
 
+      {/* Hvis isVisible er sandt, så viser vi tabellen */}
       {isVisible && (
         <table>
           <thead>
@@ -39,6 +62,7 @@ const BackofficeStays = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Vi kører igennem alle vores ophold og viser dem i tabellen */}
             {stays?.map((stay) => (
               <tr key={stay._id} className='backofficeItem'>
                 <td>{stay.title}</td>
@@ -54,7 +78,7 @@ const BackofficeStays = () => {
                   <Button
                     buttonText='Slet'
                     background='red'
-                    onClick={() => deleteStay(stay._id)}
+                    onClick={() => handleDelete(stay._id)} // Brug handleDelete her
                   />
                   <Button
                     buttonText='Redigér'
@@ -76,6 +100,7 @@ const BackofficeStays = () => {
         </table>
       )}
 
+      {/* Outlet gør det muligt at vise indhold fra underliggende routes */}
       <Outlet context={{ refetch }} />
     </article>
   );

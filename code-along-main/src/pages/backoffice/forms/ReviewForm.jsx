@@ -1,33 +1,34 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useOutletContext, useParams } from "react-router-dom";
-import { useReviews } from "../../../components/hooks/useReviews"; // Assuming this is the correct hook for reviews
-import styles from "./form.module.css";
+import { useEffect, useState } from "react"; 
+import { useNavigate, useOutletContext, useParams } from "react-router-dom"; 
+import { useReviews } from "../../../components/hooks/useReviews";
+import styles from "./form.module.css"; 
 import Button from "../../../components/button/Button";
 
+// ReviewForm er en formular til at oprette eller redigere en anmeldelse
 const ReviewForm = ({ isEditMode }) => {
-  const [review, setReview] = useState(""); // Correct state for review text
-  const [age, setAge] = useState(""); // Age of reviewer
-  const [name, setName] = useState(""); // Name of reviewer
-  const [selectedFile, setSelectedFile] = useState(null); // File upload state
-  const [image, setImage] = useState(null); // Image preview state
-  
-  const { refetch } = useOutletContext(); // To trigger a refetch after submit
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const { createReview, isLoading, fetchReviewById, updateReview } = useReviews();
+  // Opretter forskellige bokse (state) til at gemme data om anmeldelsen
+  const [review, setReview] = useState("");
+  const [age, setAge] = useState("");
+  const [name, setName] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [image, setImage] = useState(null);
 
+  const { refetch } = useOutletContext(); // Henter en funktion til at opdatere anmeldelser
+  const navigate = useNavigate(); // Bruges til at skifte side
+  const { id } = useParams(); // Finder anmeldelsens ID fra URL'en
+  const { createReview, isLoading, fetchReviewById, updateReview } = useReviews(); // Funktioner til at hente, oprette og opdatere anmeldelser
+
+  // Hvis vi redigerer en anmeldelse, henter vi dens data
   useEffect(() => {
     if (isEditMode && id) {
       const loadReviewData = async () => {
         try {
-          const response = await fetchReviewById(id);
+          const response = await fetchReviewById(id); // Henter anmeldelsen
 
           if (response) {
             setReview(response.review);
             setAge(response.age);
             setName(response.name);
-            // Assuming review includes a file property
-            setFile(response.file);
           }
         } catch (error) {
           console.error("Error fetching review:", error);
@@ -36,25 +37,28 @@ const ReviewForm = ({ isEditMode }) => {
 
       loadReviewData();
     }
-  }, [id, isEditMode, fetchReviewById]);
+  }, [id, isEditMode, fetchReviewById]); // Kører kun, hvis id eller isEditMode ændrer sig
 
+  // Når brugeren vælger et billede, gemmer vi det
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setSelectedFile(file);
-      const objUrl = window.URL.createObjectURL(file);
-      setImage(objUrl);
+      setSelectedFile(file); // Gemmer filen
+      const objUrl = window.URL.createObjectURL(file); // Laver en midlertidig URL til at vise billedet
+      setImage(objUrl); // Gemmer billed-URL'en til forhåndsvisning
     }
   };
 
+  // Når brugeren trykker på "Tilføj review" eller "Opdater review"
   const handleSubmitReview = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Stopper siden fra at genindlæse
 
-    const reviewData = new FormData();
-    reviewData.append("review", review);
-    reviewData.append("age", age);
-    reviewData.append("name", name);
+    const reviewData = new FormData(); // Bruger FormData til at kunne sende filer
+    reviewData.append("review", review); 
+    reviewData.append("age", age); 
+    reviewData.append("name", name); 
 
+    // Hvis brugeren har valgt et billede, tilføjes det
     if (selectedFile) {
       reviewData.append("file", selectedFile);
     }
@@ -63,15 +67,15 @@ const ReviewForm = ({ isEditMode }) => {
       let response;
       if (isEditMode && id) {
         reviewData.append("id", id);
-        response = await updateReview(reviewData);
+        response = await updateReview(reviewData); // Opdaterer anmeldelsen
       } else {
-        response = await createReview(reviewData);
+        response = await createReview(reviewData); // Opretter en ny anmeldelse
       }
       console.log(isEditMode ? "Review opdateret" : "Review oprettet", response);
 
       if (response) {
-        await refetch(); // Refetch to update the reviews list
-        navigate("/review"); // Redirect after submission
+        await refetch(); // Opdaterer listen med anmeldelser
+        navigate("/review"); // Går tilbage til anmeldelsessiden
       }
     } catch (error) {
       console.error("Fejl ved håndtering af reviews:", error);
@@ -81,6 +85,8 @@ const ReviewForm = ({ isEditMode }) => {
   return (
     <form onSubmit={handleSubmitReview} className={styles.form}>
       <h2>{isEditMode ? "Opdater review" : "Tilføj review"}</h2>
+
+      {/* Felt til at skrive anmeldelsen */}
       <div>
         <label htmlFor="review">Review:</label>
         <textarea
@@ -90,8 +96,10 @@ const ReviewForm = ({ isEditMode }) => {
           required
         />
       </div>
+
+      {/* Felt til at angive alder */}
       <div>
-        <label htmlFor="age">Age:</label>
+        <label htmlFor="age">Alder:</label>
         <input
           id="age"
           type="number"
@@ -100,8 +108,10 @@ const ReviewForm = ({ isEditMode }) => {
           required
         />
       </div>
+
+      {/* Felt til at skrive anmelderens navn */}
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Navn:</label>
         <input
           id="name"
           type="text"
@@ -110,11 +120,15 @@ const ReviewForm = ({ isEditMode }) => {
           required
         />
       </div>
+
+      {/* Billedupload */}
       <div>
         <label htmlFor="image">Vælg billede (valgfrit):</label>
         {image && <img className={styles.previewImage} src={image} alt="Preview" />}
         <input id="image" type="file" onChange={handleImageChange} />
       </div>
+
+      {/* Knappen til at sende anmeldelsen */}
       <Button type="submit" buttonText={isEditMode ? "Opdater review" : "Tilføj review"} background={!isEditMode && "green"} />
     </form>
   );

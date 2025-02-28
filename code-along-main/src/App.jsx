@@ -38,7 +38,7 @@ function App() {
           ],
         },
         {
-          path: "reviews", // Ensure there's a route for reviews
+          path: "reviews", 
           element: <BackofficeReviews />,
           children: [
             {
